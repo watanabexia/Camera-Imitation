@@ -1,0 +1,20 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class createcamera : MonoBehaviour
+{
+    void Update()
+    {
+        // 以摄像机所在位置为起点，创建一条向下发射的射线  
+        Ray ray = Camera
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            // 如果射线与平面碰撞，打印碰撞物体信息  
+            Debug.Log("碰撞对象: " + hit.collider.name);
+            // 在场景视图中绘制射线  
+            Debug.DrawLine(ray.origin, hit.point, Color.red);
+        }
+    }
+}
