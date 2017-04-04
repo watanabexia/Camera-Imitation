@@ -7,7 +7,7 @@ public class createcamera : MonoBehaviour
     void Update()
     {
         // 以摄像机所在位置为起点，创建一条向下发射的射线  
-        Ray ray = Camera
+        Ray ray = new Ray(transform.position, -transform.up);
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
