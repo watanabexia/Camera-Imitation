@@ -1,4 +1,4 @@
 sceneSetups:
-- path: "F:/learn-unity/Unity3D\u6E38\u620F\u5F00\u53D1\u96F6\u57FA\u7840\u5230\u7CBE\u901A/C4_Terrains/C4_ResidentEvil_Project/Assets/_Scenes/2_Islands.unity"
+- path: Assets/original scene.unity
   isLoaded: 1
   isActive: 1

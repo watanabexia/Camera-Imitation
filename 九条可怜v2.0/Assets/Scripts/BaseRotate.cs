@@ -17,8 +17,8 @@ public class BaseRotate : MonoBehaviour
             GameObject.Find("First Person Controller").GetComponent<MouseLook>().enabled = false;
             Vector3 offset = mousePos - Input.mousePosition;
 
-            transform.Rotate(Vector3.down * offset.x, Space.World);
-            transform.Rotate(Vector3.left * offset.y, Space.World);
+            transform.Rotate(Vector3.down * offset.x, Space.Self);
+            transform.Rotate(Vector3.left * offset.y, Space.Self);
 
             mousePos = Input.mousePosition;
             yield return null;
