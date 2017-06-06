@@ -29,8 +29,8 @@ public class CameraProcessing : MonoBehaviour
             //Debug.Log("1");
             GUILayout.BeginArea(new Rect(100, 200, 300, 400));
             GUILayout.Label("Name " + GameObject.Find(hit.collider.name).name);
-            GUILayout.Label("Range " + GameObject.Find(hit.collider.name).GetComponent<Light>().range.ToString());
-            GUILayout.Label("SpotAngle " + GameObject.Find(hit.collider.name).GetComponent<Light>().spotAngle.ToString());
+            GUILayout.Label("实用度 " + GameObject.Find(hit.collider.name).GetComponent<Light>().range.ToString());
+            GUILayout.Label("圆锥角度 " + GameObject.Find(hit.collider.name).GetComponent<Light>().spotAngle.ToString() + "°");
         }
     }
     void FixedUpdate()
@@ -59,17 +59,29 @@ public class CameraProcessing : MonoBehaviour
                     camera.name = log;
                     camera.GetComponent<Light>().type = LightType.Spot;
                     camera.AddComponent<BaseRotate>();
+                    camera.AddComponent<SelfRotate>();
                     camera.GetComponent<Renderer>().material = Resources.Load("textures/Camera", typeof(Material)) as Material;//大神
                     camera.GetComponent<Light>().color = Color.green;
                     camera.GetComponent<Light>().shadows = LightShadows.Hard;
                 }
                 else
                 {
-                    float cloney = GameObject.Find(hit.collider.name).transform.rotation.y;
-                    float clonez = GameObject.Find(hit.collider.name).transform.rotation.z;
-                    GameObject.Find(hit.collider.name).transform.Rotate(int.Parse(GameObject.Find("Y Axe Rotate").GetComponent<Text>().text), cloney, clonez, Space.Self);
-                    GameObject.Find(hit.collider.name).GetComponent<Light>().range = float.Parse(GameObject.Find("Range").GetComponent<Text>().text);//using UnityEngine.UI!
+                    //float cloney = GameObject.Find(hit.collider.name).transform.rotation.y;
+                    //float clonez = GameObject.Find(hit.collider.name).transform.rotation.z;
+                    //GameObject.Find(hit.collider.name).transform.Rotate(int.Parse(GameObject.Find("Y Axe Rotate").GetComponent<Text>().text), cloney, clonez, Space.Self);
+                    float swi2 = float.Parse(GameObject.Find("Y Axe Rotate").GetComponent<Text>().text);
+                    float swi = 10;
+                    GameObject.Find(hit.collider.name).GetComponent<Light>().range = (float.Parse(GameObject.Find("Range").GetComponent<Text>().text)+swi2-30)/swi;//using UnityEngine.UI!
                     GameObject.Find(hit.collider.name).GetComponent<Light>().spotAngle = float.Parse(GameObject.Find("Angle").GetComponent<Text>().text);
+                    if (GameObject.Find("Toggle").GetComponent<Toggle>().isOn)
+                    {
+                        GameObject.Find(hit.collider.name).GetComponent<SelfRotate>().is_rotate = true;
+                        GameObject.Find(hit.collider.name).GetComponent<SelfRotate>().speed  = float.Parse(GameObject.Find("RotateSpeed").GetComponent<Text>().text);
+                    }
+                    else
+                    {
+                        GameObject.Find(hit.collider.name).GetComponent<SelfRotate>().is_rotate = false;
+                    }
                 }
             }
         }
